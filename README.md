@@ -11,9 +11,9 @@ The point is to have a dedicated, well-tuned thread pool and isolate the blockin
 A simple `account` table which consists of `id`(auto-generated), `bsb` (branch identification)  `identification` (account Number as pk), `opening_date` and `balance` columns is used.
 
 ## Non Blocking apis
-|-------------------------------------------------------------------------------|
-| URL            :   Post- http://localhost:8080/account/open                   |
-| functionality  :   opening an account                                         |       |                                       |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------
+| URL            :   Post- http://localhost:8080/account/open                   
+| functionality  :   opening an account                                                                                      
 | Request Body   :     {
 |                          "bsb": "182182",
 |                         "identification": 1172223333,
@@ -27,10 +27,68 @@ A simple `account` table which consists of `id`(auto-generated), `bsb` (branch i
 |                       "openingDate": "2021-09-13T00:00:00.000+0000",
 |                       "updatedAt": "2021-11-24T23:02:34.866+0000"
 |                   }
------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
  
- | PUT - http://localhost:8080/account/daily-interest   | This will get end-of-day balances for accounts after calulating the daily interest       |
- | PUT - http://localhost:8080/account/monthly-interest | This will get monthely interest of each user                             |
+ |------------------------------------------------------------------------------------------------------------------------------------------------------------
+| URL            :   Post- http://localhost:8080/account/daily-interest                  
+| functionality  :   Responsible for calculating the interest on daily basis                                                                                  
+| Request Body   :     {
+                           "balanceDate" : "2021-09-19",
+                          "balances": [
+                               {
+                               "bsb": "182182",
+                               "identification": 111222333,
+                               "balance": 123.34
+                               },
+                               {
+                               "bsb": "182182",
+                               "identification": 222000111,
+                               "balance": 12.34
+                               },
+                               {
+                               "bsb": "182182",
+                               "identification": 222000999,
+                               "balance": 0.00
+                               }
+                           ]
+                       }    
+|
+|  Response       :
+|                     {
+                       "balanceDate": "2021-11-24T23:11:34.084+0000",
+                       "balances": [
+                           {
+                               "bsb": "182182",
+                               "identification": 111222333,
+                               "openingDate": "2021-09-13T00:00:00.000+0000",
+                               "updatedAt": "2021-11-24T23:11:34.084+0000",
+                               "balance": 1670.14
+                           },
+                           {
+                               "bsb": "182182",
+                               "identification": 1112223333,
+                               "openingDate": "2021-09-13T00:00:00.000+0000",
+                               "updatedAt": "2021-11-24T23:11:34.084+0000",
+                               "balance": 4461.87
+                           },
+                           {
+                               "bsb": "182182",
+                               "identification": 1162223333,
+                               "openingDate": "2021-09-13T00:00:00.000+0000",
+                               "updatedAt": "2021-11-24T23:11:34.084+0000",
+                               "balance": 44568.34
+                           },
+                           {
+                               "bsb": "182182",
+                               "identification": 1172223333,
+                               "openingDate": "2021-09-13T00:00:00.000+0000",
+                               "updatedAt": "2021-11-24T23:11:34.084+0000",
+                               "balance": 345101
+                           },
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ | PUT - http://localhost:8080/account/daily-interest   | for getting balances for  accounts after calulating the daily interest till     
+ | PUT - http://localhost:8080/account/monthly-interest | This will get monthely interest of each user                             
 
 
 # Reference:
