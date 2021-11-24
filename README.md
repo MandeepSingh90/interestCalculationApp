@@ -11,22 +11,23 @@ The point is to have a dedicated, well-tuned thread pool and isolate the blockin
 A simple `account` table which consists of `id`(auto-generated), `bsb` (branch identification)  `identification` (account Number as pk), `opening_date` and `balance` columns is used.
 
 ## Non Blocking apis
-
-  URL            :   Post- http://localhost:8080/account/open   
-  functionality  :   opening an account                                                 |                                       |
-  Request Body   :     {
-                          "bsb": "182182",
-                          "identification": 1172223333,
-                          "openingDate" : "2021-09-13"
-                        }                                
- Response       :
-                     {
-                        "bsb": "182182",
-                        "identification": 11722233331,
-                        "openingDate": "2021-09-13T00:00:00.000+0000",
-                        "updatedAt": "2021-11-24T23:02:34.866+0000"
-                    }
-
+|-------------------------------------------------------------------------------|
+| URL            :   Post- http://localhost:8080/account/open                   |
+| functionality  :   opening an account                                         |       |                                       |
+| Request Body   :     {
+|                          "bsb": "182182",
+|                         "identification": 1172223333,
+|                         "openingDate" : "2021-09-13"
+|                       }     
+|
+|  Response       :
+|                     {
+|                       "bsb": "182182",
+|                       "identification": 11722233331,
+|                       "openingDate": "2021-09-13T00:00:00.000+0000",
+|                       "updatedAt": "2021-11-24T23:02:34.866+0000"
+|                   }
+-----------------------------------------------------------------------------------
  
  | PUT - http://localhost:8080/account/daily-interest   | This will get end-of-day balances for accounts after calulating the daily interest       |
  | PUT - http://localhost:8080/account/monthly-interest | This will get monthely interest of each user                             |
